@@ -1,0 +1,124 @@
+{
+  "name": "ddd-healthcare-interactive",
+  "version": "2.0.0",
+  "description": "Dynamic Interactive DDD Healthcare SAAS - Complete end-to-end web-based system for Division of Developmental Disabilities healthcare management",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "npm run start:backend",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run start",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "install:all": "npm install && npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "k8s:deploy": "kubectl apply -f k8s/",
+    "k8s:delete": "kubectl delete -f k8s/",
+    "migrate": "cd backend && npm run migrate",
+    "seed": "cd backend && npm run seed",
+    "reset-db": "cd backend && npm run reset-db",
+    "backup-db": "cd backend && npm run backup-db",
+    "restore-db": "cd backend && npm run restore-db",
+    "generate-docs": "npm run generate-docs:backend && npm run generate-docs:frontend",
+    "generate-docs:backend": "cd backend && npm run docs",
+    "generate-docs:frontend": "cd frontend && npm run docs",
+    "security-audit": "npm audit && npm run security-audit:backend && npm run security-audit:frontend",
+    "security-audit:backend": "cd backend && npm audit",
+    "security-audit:frontend": "cd frontend && npm audit",
+    "performance-test": "cd backend && npm run performance-test",
+    "e2e-test": "cd frontend && npm run e2e",
+    "clean": "npm run clean:backend && npm run clean:frontend && rm -rf node_modules",
+    "clean:backend": "cd backend && npm run clean",
+    "clean:frontend": "cd frontend && npm run clean",
+    "deploy:staging": "npm run build && npm run deploy:staging:backend && npm run deploy:staging:frontend",
+    "deploy:production": "npm run build && npm run deploy:production:backend && npm run deploy:production:frontend",
+    "deploy:staging:backend": "cd backend && npm run deploy:staging",
+    "deploy:staging:frontend": "cd frontend && npm run deploy:staging",
+    "deploy:production:backend": "cd backend && npm run deploy:production",
+    "deploy:production:frontend": "cd frontend && npm run deploy:production",
+    "health-check": "curl -f http://localhost:5000/health || exit 1",
+    "setup": "npm run install:all && npm run migrate && npm run seed",
+    "dev:full": "npm run setup && npm run dev"
+  },
+  "keywords": [
+    "healthcare",
+    "ddd",
+    "developmental-disabilities",
+    "saas",
+    "interactive",
+    "real-time",
+    "collaborative",
+    "react",
+    "node.js",
+    "postgresql",
+    "socket.io",
+    "material-ui",
+    "drag-drop",
+    "charts",
+    "workflow",
+    "calendar",
+    "notifications",
+    "dashboard"
+  ],
+  "author": "DDD Healthcare Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ddd-healthcare/interactive-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ddd-healthcare/interactive-system/issues"
+  },
+  "homepage": "https://ddd-healthcare.com",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5"
+  },
+  "dependencies": {},
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
